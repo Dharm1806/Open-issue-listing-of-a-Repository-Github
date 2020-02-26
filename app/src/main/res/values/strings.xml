@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">GithubIssues</string>
+    <string name="mssg_no_comment_found">No comment found on this issue</string>
+    <string name="ok_button">ok</string>
+    <string name="please_wait">Please Wait ...</string>
+    <string name="something_went_wrong_please_try_again">Something went wrong please try again</string>
+</resources>
