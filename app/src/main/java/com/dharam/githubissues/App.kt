@@ -2,6 +2,7 @@ package com.dharam.githubissues
 
 import android.app.Application
 import com.dharam.githubissues.constants.Constants.BASE_URL
+import com.dharam.githubissues.constants.Constants.CACHE_TIME_IN_HOURS
 import com.dharam.githubissues.repository.api.IssueApis
 import com.google.gson.GsonBuilder
 import okhttp3.*
@@ -43,7 +44,7 @@ class App : Application() {
         val response: Response = chain.proceed(chain.request())
         // re-write response header to force use of cache
         val cacheControl = CacheControl.Builder()
-                .maxAge(24, TimeUnit.HOURS)
+                .maxAge(CACHE_TIME_IN_HOURS, TimeUnit.HOURS)
                 .build()
         response.newBuilder()
                 .header("Cache-Control", cacheControl.toString())

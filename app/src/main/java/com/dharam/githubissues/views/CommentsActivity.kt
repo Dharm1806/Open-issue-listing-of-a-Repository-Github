@@ -24,6 +24,7 @@ class CommentsActivity : AppCompatActivity() {
 
     private lateinit var mCommentViewModel: CommentsViewModel
     val subscriptions = CompositeDisposable()
+
     @Override
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,7 +63,7 @@ class CommentsActivity : AppCompatActivity() {
 
     //get the comment list data from repository
 
-    fun getComments() {
+    private fun getComments() {
 
         subscribe(mCommentViewModel.getComments(intent.getStringExtra(EXTRA_NUMBER))
                 .subscribeOn(Schedulers.io())
@@ -77,46 +78,44 @@ class CommentsActivity : AppCompatActivity() {
     }
 
 
-    fun showComments(commentData: CommentList) {
-        if (commentData.error == null) {
-            //sort the comment list
-            val commentList = commentData.commentList.sortedWith(compareBy { it.updated_at })
-            //set the the adapter to comment list
-            commentsList.adapter = CommentsAdapter(commentList)
-            //set the layout manager to comment list view
-            commentsList.layoutManager = LinearLayoutManager(this)
-            //hide the error view
-            hideErrorView()
+    private fun showComments(commentData: CommentList) = if (commentData.error == null) {
+        //sort the comment list
+        val commentList = commentData.commentList.sortedWith(compareBy { it.updated_at })
+        //set the the adapter to comment list
+        commentsList.adapter = CommentsAdapter(commentList)
+        //set the layout manager to comment list view
+        commentsList.layoutManager = LinearLayoutManager(this)
+        //hide the error view
+        hideErrorView()
 
-        } else if (commentData.error is ConnectException || commentData.error is UnknownHostException) {
-            //show the connection error
-            showError(commentData.error.localizedMessage)
+    } else if (commentData.error is ConnectException || commentData.error is UnknownHostException) {
+        //show the connection error
+        showError(commentData.error.localizedMessage)
 
-        } else {
-            //show the errror received from server
+    } else {
+        //show the errror received from server
 
-            showError(commentData.message.toString())
-        }
+        showError(commentData.message.toString())
     }
 
-    fun showError(error: String) {
+    private fun showError(error: String) {
         if (error.length != 0)
             error_message.text = error
         error_message.visibility = View.VISIBLE
     }
 
-    fun subscribe(disposable: Disposable): Disposable {
+    private fun subscribe(disposable: Disposable): Disposable {
         subscriptions.add(disposable)
         return disposable
     }
 
     //hide the error view
-    fun hideErrorView() {
+    private fun hideErrorView() {
         error_message.visibility = View.GONE
     }
 
     //hide the progressbar
-    fun hideProgressbar() {
+    private fun hideProgressbar() {
         progressBar.visibility = View.GONE
     }
 }

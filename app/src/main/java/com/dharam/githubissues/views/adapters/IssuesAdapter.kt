@@ -39,8 +39,8 @@ class IssueHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 }
 
 
-class IssuesAdapter(var issues: List<IssuesModel>,
-                    val itemClickListener: OnItemClickListener) : RecyclerView.Adapter<IssueHolder>() {
+class IssuesAdapter(private var issues: List<IssuesModel>,
+                    private val itemClickListener: OnItemClickListener) : RecyclerView.Adapter<IssueHolder>() {
 
     @Override
     override fun onCreateViewHolder(parent: ViewGroup, position: Int): IssueHolder {

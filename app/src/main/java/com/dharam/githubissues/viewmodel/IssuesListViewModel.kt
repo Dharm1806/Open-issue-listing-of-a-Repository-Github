@@ -11,7 +11,7 @@ class IssuesListViewModel(application: Application) : AndroidViewModel(Applicati
 
     /*
     call issue list data from issue list repository  and @return observable with issuelist
-*/
+    */
     fun getIssues(): Observable<IssueList> = IssueListRepository().getIssues()
             .map {
                 IssueList(it, "")

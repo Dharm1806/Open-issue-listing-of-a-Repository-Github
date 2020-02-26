@@ -88,7 +88,7 @@ class IssueListActivity : AppCompatActivity(), OnItemClickListener {
     }
 
 
-    fun getIssuesList() {
+    private fun getIssuesList() {
 
         subscribe(mIssuesListViewModel.getIssues()
                 .subscribeOn(Schedulers.io())
@@ -102,13 +102,13 @@ class IssueListActivity : AppCompatActivity(), OnItemClickListener {
                 }))
     }
 
-    fun subscribe(disposable: Disposable): Disposable {
+    private fun subscribe(disposable: Disposable): Disposable {
 
         subscriptions.add(disposable)
         return disposable
     }
 
-    fun showIssuesList(issuesData: IssueList) = if (issuesData.error == null) {
+    private fun showIssuesList(issuesData: IssueList) = if (issuesData.error == null) {
         //sort issue list
         val issueList = issuesData.issues.sortedWith(compareBy({ it.updated_at })).reversed()
         //set adapter to issuelist recyclerview
@@ -126,15 +126,15 @@ class IssueListActivity : AppCompatActivity(), OnItemClickListener {
     }
 
     //handle the error view visibility
-    fun showError(error: String) {
+    private fun showError(error: String) {
 
-        if (error.length != 0)
+        if (error.isNotEmpty())
             error_message.text = error
         error_message.visibility = View.VISIBLE
     }
 
     //show the no comment message
-    fun showNoCommentMessage() {
+    private fun showNoCommentMessage() {
 
         var alertDialog: AlertDialog? = null
         val builder = AlertDialog.Builder(this)
@@ -159,13 +159,13 @@ class IssueListActivity : AppCompatActivity(), OnItemClickListener {
     }
 
     //hide the error view
-    fun hideErrorView() {
+    private fun hideErrorView() {
 
         error_message.visibility = View.GONE
     }
 
     //hide the progressbar
-    fun hideProgressbar() {
+    private fun hideProgressbar() {
 
         progressBar.visibility = View.GONE
     }

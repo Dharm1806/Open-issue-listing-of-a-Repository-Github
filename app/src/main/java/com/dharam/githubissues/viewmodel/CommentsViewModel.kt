@@ -11,7 +11,7 @@ class CommentsViewModel(application: Application):AndroidViewModel(Application()
 
     /*
     call comment list data from comment list repository  and  @return observable with comment list
-*/
+    */
     fun getComments(number:String): Observable<CommentList> =
             CommentsRepository().getComments(number)
                     .map {
