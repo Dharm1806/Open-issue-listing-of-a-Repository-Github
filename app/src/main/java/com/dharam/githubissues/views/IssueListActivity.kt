@@ -44,9 +44,7 @@ class IssueListActivity : AppCompatActivity(), OnItemClickListener {
         val actionbar = supportActionBar
         //set actionbar title
         actionbar!!.title = ISSUE_LIST_TITLE
-        //set back button
-        actionbar.setDisplayHomeAsUpEnabled(true)
-        actionbar.setDisplayHomeAsUpEnabled(true)
+
 
         //get issues list
         getIssuesList()
@@ -65,11 +63,6 @@ class IssueListActivity : AppCompatActivity(), OnItemClickListener {
         subscriptions.clear()
     }
 
-    @Override
-    override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
-        return true
-    }
 
     /*
         handle item click listener of issue list
