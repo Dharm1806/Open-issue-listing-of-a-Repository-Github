@@ -29,7 +29,7 @@ class IssueListActivity : AppCompatActivity(), OnItemClickListener {
 
     lateinit var mProgressBar: ProgressBar
     private lateinit var mIssuesListViewModel: IssuesListViewModel
-    val subscriptions = CompositeDisposable()
+    private val subscriptions = CompositeDisposable()
 
     @Override
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -110,7 +110,7 @@ class IssueListActivity : AppCompatActivity(), OnItemClickListener {
 
     private fun showIssuesList(issuesData: IssueList) = if (issuesData.error == null) {
         //sort issue list
-        val issueList = issuesData.issues.sortedWith(compareBy({ it.updated_at })).reversed()
+        val issueList = issuesData.issues.sortedWith(compareBy { it.updated_at }).reversed()
         //set adapter to issuelist recyclerview
         issueListView.adapter = IssuesAdapter(issueList, this)
         //set the layoutmanager to issuelist recyclerview

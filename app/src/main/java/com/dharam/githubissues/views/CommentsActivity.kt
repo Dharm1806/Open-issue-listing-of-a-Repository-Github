@@ -23,7 +23,7 @@ import java.net.UnknownHostException
 class CommentsActivity : AppCompatActivity() {
 
     private lateinit var mCommentViewModel: CommentsViewModel
-    val subscriptions = CompositeDisposable()
+    private val subscriptions = CompositeDisposable()
 
     @Override
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -95,11 +95,11 @@ class CommentsActivity : AppCompatActivity() {
     } else {
         //show the errror received from server
 
-        showError(commentData.message.toString())
+        showError(commentData.message)
     }
 
     private fun showError(error: String) {
-        if (error.length != 0)
+        if (error.isNotEmpty())
             error_message.text = error
         error_message.visibility = View.VISIBLE
     }
